@@ -1,0 +1,8 @@
+com\orangeHRM\stepDefinitions\LoginStepDefinitions$TestData.class
+com\orangeHRM\stepDefinitions\BaseStepDefinition.class
+com\orangeHRM\stepDefinitions\PimStepDefinitions.class
+com\orangeHRM\stepDefinitions\AdminStepDefinitions.class
+com\orangeHRM\stepDefinitions\LoginStepDefinitions.class
+com\orangeHRM\runners\OrangeHrmMasterRunner.class
+com\orangeHRM\stepDefinitions\CommonStepDefinitions.class
+com\orangeHRM\stepDefinitions\LeaveStepDefinitions.class
