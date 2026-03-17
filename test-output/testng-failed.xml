@@ -6,9 +6,9 @@
       <class name="com.orangeHRM.runners.OrangeHrmMasterRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="0 1"/>
           <include name="reportSetup"/>
-          <include name="runScenario" invocation-numbers="0"/>
+          <include name="tearDownClass"/>
           <include name="teardown"/>
         </methods>
       </class> <!-- com.orangeHRM.runners.OrangeHrmMasterRunner -->

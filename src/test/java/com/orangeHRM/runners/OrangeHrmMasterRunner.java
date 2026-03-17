@@ -1,4 +1,4 @@
-package com.orangeHRM.runners;
+package com.orangeHrm.runners;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,8 +20,8 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
 	plugin = { "json:target/cucumber-report.json", "html:target/cucumber-report", "rerun:rerun/failed_scenarios.txt" }, 
 	features = {"src/test/resources" }, 
-	glue = { "com.orangeHRM.stepDefinitions" }, 
-	tags = "@admin2",
+	glue = { "com.orangeHrm.stepDefinitions" }, 
+	tags = "@navigation",
 	dryRun = false,
 	monochrome = true
 	)
@@ -84,4 +84,5 @@ public class OrangeHrmMasterRunner extends AbstractTestNGCucumberTests {
 		}
 		ExtentManager.flush();
 	}
+
 }

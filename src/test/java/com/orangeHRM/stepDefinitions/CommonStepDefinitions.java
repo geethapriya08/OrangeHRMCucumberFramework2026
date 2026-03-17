@@ -1,4 +1,4 @@
-package com.orangeHRM.stepDefinitions;
+package com.orangeHrm.stepDefinitions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

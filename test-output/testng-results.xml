@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
     <line>
-      <![CDATA[Execution started for : Verify employee creation in OrangeHRM]]>
+      <![CDATA[Execution started for : Verify employee creation in OrangeHRM via examples]]>
+    </line>
+    <line>
+      <![CDATA[Execution started for : Verify employee creation in OrangeHRM via examples]]>
     </line>
   </reporter-output>
-  <suite started-at="2026-02-24T10:45:37 IST" name="Default suite" finished-at="2026-02-24T10:50:28 IST" duration-ms="290566">
+  <suite started-at="2026-03-10T10:10:41 IST" name="Default suite" finished-at="2026-03-10T10:10:45 IST" duration-ms="3716">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-02-24T10:45:37 IST" name="Default test" finished-at="2026-02-24T10:50:28 IST" duration-ms="290566">
+    <test started-at="2026-03-10T10:10:41 IST" name="Default test" finished-at="2026-03-10T10:10:45 IST" duration-ms="3716">
       <class name="com.orangeHRM.runners.OrangeHrmMasterRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" started-at="2026-02-24T10:45:37 IST" name="setUpClass" finished-at="2026-02-24T10:45:38 IST" duration-ms="564" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:41 IST" name="setUpClass" finished-at="2026-03-10T10:10:42 IST" duration-ms="564" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@5e2718b3]]>
+                <![CDATA[org.testng.TestRunner@66c9b52f]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method is-config="true" signature="reportSetup()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" started-at="2026-02-24T10:45:38 IST" name="reportSetup" finished-at="2026-02-24T10:45:38 IST" duration-ms="164" status="PASS">
+        <test-method is-config="true" signature="reportSetup()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:42 IST" name="reportSetup" finished-at="2026-03-10T10:10:42 IST" duration-ms="153" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- reportSetup -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" started-at="2026-02-24T10:45:38 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-02-24T10:50:27 IST" duration-ms="289431" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-10T10:10:44 IST" duration-ms="1701" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Verify employee creation in OrangeHRM"]]>
+                <![CDATA["Verify employee creation in OrangeHRM via examples"]]>
               </value>
             </param>
             <param index="1">
@@ -41,17 +44,108 @@
               </value>
             </param>
           </params>
+          <exception class="io.cucumber.testng.UndefinedStepException">
+            <message>
+              <![CDATA[The step 'I open the OrangeHRM login page' and 1 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("I open the OrangeHRM login page")
+public void i_open_the_orange_hrm_login_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("I log in with username {string} and password {string}")
+public void i_log_in_with_username_and_password(String string, String string2) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[io.cucumber.testng.UndefinedStepException: The step 'I open the OrangeHRM login page' and 1 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("I open the OrangeHRM login page")
+public void i_open_the_orange_hrm_login_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("I log in with username {string} and password {string}")
+public void i_log_in_with_username_and_password(String string, String string2) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+at ✽.I open the OrangeHRM login page(file:///C:/Geetha/Testing%20Practice/Frameworks/OrangeHrmCucumberFramework/OrangeHRM/src/test/resources/AdminScript.feature:34)
+]]>
+            </full-stacktrace>
+          </exception> <!-- io.cucumber.testng.UndefinedStepException -->
           <reporter-output>
             <line>
-              <![CDATA[Execution started for : Verify employee creation in OrangeHRM]]>
+              <![CDATA[Execution started for : Verify employee creation in OrangeHRM via examples]]>
             </line>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" started-at="2026-02-24T10:50:27 IST" name="teardown" finished-at="2026-02-24T10:50:27 IST" duration-ms="279" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:44 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-10T10:10:45 IST" duration-ms="979" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify employee creation in OrangeHRM via examples"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Title of your feature"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="io.cucumber.testng.UndefinedStepException">
+            <message>
+              <![CDATA[The step 'I open the OrangeHRM login page' and 1 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("I open the OrangeHRM login page")
+public void i_open_the_orange_hrm_login_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("I log in with username {string} and password {string}")
+public void i_log_in_with_username_and_password(String string, String string2) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[io.cucumber.testng.UndefinedStepException: The step 'I open the OrangeHRM login page' and 1 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("I open the OrangeHRM login page")
+public void i_open_the_orange_hrm_login_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("I log in with username {string} and password {string}")
+public void i_log_in_with_username_and_password(String string, String string2) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+at ✽.I open the OrangeHRM login page(file:///C:/Geetha/Testing%20Practice/Frameworks/OrangeHrmCucumberFramework/OrangeHRM/src/test/resources/PIM.feature:7)
+]]>
+            </full-stacktrace>
+          </exception> <!-- io.cucumber.testng.UndefinedStepException -->
+          <reporter-output>
+            <line>
+              <![CDATA[Execution started for : Verify employee creation in OrangeHRM via examples]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:45 IST" name="teardown" finished-at="2026-03-10T10:10:45 IST" duration-ms="202" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@5e3f861]" started-at="2026-02-24T10:50:27 IST" name="tearDownClass" finished-at="2026-02-24T10:50:28 IST" duration-ms="84" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.orangeHRM.runners.OrangeHrmMasterRunner@642a7222]" started-at="2026-03-10T10:10:45 IST" name="tearDownClass" finished-at="2026-03-10T10:10:45 IST" duration-ms="76" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

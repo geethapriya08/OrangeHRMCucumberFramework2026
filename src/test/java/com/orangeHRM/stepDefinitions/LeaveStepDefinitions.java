@@ -1,4 +1,4 @@
-package com.orangeHRM.stepDefinitions;
+package com.orangeHrm.stepDefinitions;
 
 import com.orangeHrm.pages.AdminPageObjects;
 import com.orangeHrm.pages.LeavePageObjects;

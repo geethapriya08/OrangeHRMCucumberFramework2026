@@ -57,6 +57,28 @@ public class LeavePageObjects {
     @FindBy(xpath = "//input[@class='viewbutton']")
     private WebElement viewButtonByClass;
 
+    // Date Picker Elements
+    @FindBy(className = "calendarBtn")
+    private WebElement calendarButton;
+
+    @FindBy(id = "txtDate")
+    private WebElement dateInputField;
+
+    @FindBy(id = "cal1Container")
+    private WebElement calendarContainer;
+
+    @FindBy(id = "cal1")
+    private WebElement calendarTable;
+
+    @FindBy(className = "calheader")
+    private WebElement calendarHeader;
+
+    @FindBy(className = "calnavright")
+    private WebElement nextMonthButton;
+
+    @FindBy(className = "calnavleft")
+    private WebElement previousMonthButton;
+
 
     public LeavePageObjects(WebDriver driver) {
         this.driver = driver;
@@ -339,4 +361,50 @@ public class LeavePageObjects {
 
     }
 
+    // Date Picker Getter Methods
+    public WebElement getCalendarButton() {
+        return calendarButton;
+    }
+
+    public WebElement getDateInputField() {
+        return dateInputField;
+    }
+
+    public WebElement getCalendarContainer() {
+        return calendarContainer;
+    }
+
+    public WebElement getCalendarTable() {
+        return calendarTable;
+    }
+
+    public WebElement getCalendarHeader() {
+        return calendarHeader;
+    }
+
+    public WebElement getNextMonthButton() {
+        return nextMonthButton;
+    }
+
+    public WebElement getPreviousMonthButton() {
+        return previousMonthButton;
+    }
+
+    /**
+     * Dynamically gets a date element from the calendar by date number
+     * @param driver WebDriver instance
+     * @param dayNumber The day number to select (1-31)
+     * @return WebElement representing the date link
+     */
+    public WebElement getDateElement(WebDriver driver, int dayNumber) {
+        return driver.findElement(By.xpath("//table[@id='cal1']//a[text()='" + dayNumber + "']"));
+    }
+
+    /**
+     * Gets the current month/year text from the calendar header
+     * @return String containing "Month Year" (e.g., "March 2026")
+     */
+    public String getCurrentMonthYearText() {
+        return calendarHeader.getText().trim();
+    }
 }

@@ -1,12 +1,17 @@
-package com.orangeHRM.stepDefinitions;
+package com.orangeHrm.stepDefinitions;
 
+import com.orangeHrm.utils.SeleniumTestHelper;
+import io.cucumber.java.en.And;
 import org.testng.Assert;
 
 import com.orangeHrm.utils.ExcelReader;
 import com.orangeHrm.pages.BaseOrangeHRMLoginPageObjects;
+import com.orangeHrm.utils.Configurations;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+
+import java.util.Objects;
 
 public class LoginStepDefinitions extends BaseStepDefinition {
 
@@ -14,13 +19,14 @@ public class LoginStepDefinitions extends BaseStepDefinition {
     private TestData testData;
 
     public LoginStepDefinitions() {
+        super();
         this.loginPageObjects = new BaseOrangeHRMLoginPageObjects(driver);
     }
 
     @When("I log in with data from test case {string}")
     public void i_log_in_with_test_case_data(String testCaseId) {
         try {
-            testData = loadTestDataFromExcel(testCaseId);
+            testData = loadUserCredentailsDataFromExcel(testCaseId);
             
             if (testData == null) {
                 throw new Exception("Test case " + testCaseId + " not found in Excel file");
@@ -45,6 +51,35 @@ public class LoginStepDefinitions extends BaseStepDefinition {
         }
     }
 
+    @Given("I open the OrangeHRM login page")
+    public void i_open_the_orange_hrm_login_page() {
+        try {
+            String url = null;
+            try {
+                url = Configurations.getProperty("url_hrm");
+            } catch (Exception ignored) {
+                // fall back below
+            }
+            if (url == null || url.isBlank()) {
+                url = "https://opensource-demo.orangehrm.com/web/index.php/auth/login";
+            }
+            loginPageObjects.open(url);
+            logReportMessage("Opened OrangeHRM login page: " + url);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to open OrangeHRM login page: " + e.getMessage(), e);
+        }
+    }
+
+    @When("I log in with username {string} and password {string}")
+    public void i_log_in_with_username_and_password(String username, String password) {
+        try {
+            loginPageObjects.login(username, password);
+            logReportMessage("Submitted login for user: " + username);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to login with provided credentials: " + e.getMessage(), e);
+        }
+    }
+
     @Then("I should be logged in successfully")
     public void i_should_be_logged_in_successfully() {
         try {
@@ -60,7 +95,7 @@ public class LoginStepDefinitions extends BaseStepDefinition {
         }
     }
 
-    private TestData loadTestDataFromExcel(String testCaseId) {
+    private TestData loadUserCredentailsDataFromExcel(String testCaseId) {
         try {
             ExcelReader excelReader = new ExcelReader();
             excelReader.setReadingSheet("LoginData");
@@ -118,4 +153,19 @@ public class LoginStepDefinitions extends BaseStepDefinition {
                     '}';
         }
     }
+
+    @When("I log in with data from test case")
+    public void i_log_in_with_data_from_test_case() {
+
+        String username = Objects.requireNonNull(loadUserCredentailsDataFromExcel("TC_001")).username;
+        String password = Objects.requireNonNull(loadUserCredentailsDataFromExcel("TC_001")).password;
+
+        try {
+            loginPageObjects.login(username, password);
+            logReportMessage("Submitted login for user: " + username);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to login with provided credentials: " + e.getMessage(), e);
+        }
+    }
+
 }
