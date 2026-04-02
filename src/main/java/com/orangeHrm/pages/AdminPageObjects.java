@@ -195,6 +195,33 @@ public class AdminPageObjects {
     @FindBy(xpath = "//span[normalize-space()='Company Info']")
     public WebElement adminCompanyInfo;
 
+    @FindBy(xpath = "(//ul[contains(@class,'l2')][.//a[contains(@class,'companyinfo')]])[1]\n" +
+            "        /li[contains(@class,'l2')]\n" +
+            "            /a[contains(@class,'l2_link') and contains(@class,'companyinfo')]\n" +
+            "            /following-sibling::ul[contains(@class,'l3')][1]\n" +
+            "            /li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminCompanyInfoOptions;
+
+    @FindBy(xpath = "//span[normalize-space()='Job']")
+    public WebElement adminJobInfo;
+
+    @FindBy(xpath = "(//li[contains(concat(' ', normalize-space(@class), ' '), ' l2 ')]\n" +
+            "   /a[contains(concat(' ', normalize-space(@class), ' '), ' l2_link ')\n" +
+            "      and contains(concat(' ', normalize-space(@class), ' '), ' job ')])[1]\n" +
+            "/following-sibling::ul[contains(@class,'l3')][1]\n" +
+            "/li[contains(@class,'l3')]/a")
+    public List<WebElement> adminJobInfoOptions;
+
+    @FindBy(xpath = "//span[normalize-space()='Qualification']")
+    public WebElement adminQualification;
+
+    @FindBy(xpath = "(//ul[contains(@class,'l2')][.//a[contains(@class,'qualifications')]])[1]\n" +
+            "/li[contains(@class,'l2')]\n" +
+            "/a[contains(@class,'l2_link') and contains(@class,'qualifications')]\n" +
+            "/following-sibling::ul[contains(@class,'l3')][1]\n" +
+            "/li[contains(@class,'l3')]/a/span\n")
+    public List<WebElement> adminQualificationInfoOptions;
+
 
     /**
      * Deprecated: Use constructor with WebDriver parameter instead
@@ -208,15 +235,14 @@ public class AdminPageObjects {
      * Navigate to Admin module by hovering on the Admin dropdown (id="admin")
      */
     public void navigateToAdminModule() throws InterruptedException {
-        WebDriver driver = Driver.getInstance();
         Thread.sleep(1500);
 
         System.out.println("Hovering over Admin dropdown...");
 
         try {
-            // Use SeleniumTestHelper.mouseHover to perform a robust hover
-            SeleniumTestHelper.mouseHover("id", "admin");
-            System.out.println("Successfully hovered over Admin dropdown (via SeleniumTestHelper)");
+            // Use SeleniumTestHelper.mouseHover with WebElement
+            SeleniumTestHelper.mouseHover(adminDropdown);
+            System.out.println("Successfully hovered over Admin dropdown");
             Thread.sleep(1500);
         } catch (Exception e) {
             System.out.println("Failed to hover over admin dropdown: " + e.getMessage());
@@ -225,21 +251,8 @@ public class AdminPageObjects {
         System.out.println("Navigating to Company Info -> General...");
 
         try {
-            WebDriver actualDriver = driver;
-            if (driver instanceof com.orangeHrm.utils.WebDriverDispatcher) {
-                actualDriver = ((com.orangeHrm.utils.WebDriverDispatcher) driver).getUnderlyingDriver();
-            }
-
-            // Hover over Company Info
-            System.out.println("Hovering over Company Info...");
-            Actions actions = new Actions(actualDriver);
-            actions.moveToElement(companyInfoSpan).perform();
-            System.out.println("Successfully hovered over Company Info");
-            Thread.sleep(1000);
-
-            // Click on General
-            System.out.println("Clicking on General...");
-            actions.click(generalSpan).perform();
+            // Use actionsClick to hover and click in one operation
+            SeleniumTestHelper.actionsClick(generalSpan);
             System.out.println("Successfully clicked General");
             Thread.sleep(2000);
         } catch (Exception e) {
@@ -251,27 +264,13 @@ public class AdminPageObjects {
      * Navigate to Company Info -> General section from Admin module
      */
     public void navigateToEmployeeManagement() throws InterruptedException {
-        WebDriver driver = Driver.getInstance();
         Thread.sleep(1500);
 
         System.out.println("Navigating to Company Info -> General...");
 
         try {
-            WebDriver actualDriver = driver;
-            if (driver instanceof com.orangeHrm.utils.WebDriverDispatcher) {
-                actualDriver = ((com.orangeHrm.utils.WebDriverDispatcher) driver).getUnderlyingDriver();
-            }
-
-            // Hover over Company Info
-            System.out.println("Hovering over Company Info...");
-            Actions actions = new Actions(actualDriver);
-            actions.moveToElement(companyInfoSpan).perform();
-            System.out.println("Successfully hovered over Company Info");
-            Thread.sleep(1000);
-
-            // Click on General
-            System.out.println("Clicking on General...");
-            actions.click(generalSpan).perform();
+            // Use actionsClick to hover and click in one operation
+            SeleniumTestHelper.actionsClick(generalSpan);
             System.out.println("Successfully clicked General");
             Thread.sleep(2000);
         } catch (Exception e) {
@@ -623,22 +622,22 @@ public class AdminPageObjects {
         fillCountrydropdown("IN");
 //
 //		// Fill Address1
-		fillAddressField1(" 456 W 100 N or 123 Main St");
+        fillAddressField1(" 456 W 100 N or 123 Main St");
 //		// Fill Address2
-		fillAddressField2("RR 3 Box 9, Canton OH 44730");
+        fillAddressField2("RR 3 Box 9, Canton OH 44730");
 //		// Fill City
-		fillCityField("Cannada");
+        fillCityField("Cannada");
 //
 //		// Fill State
-		fillStateField("Phoenix");
+        fillStateField("Phoenix");
 //
 //		// Fill Zipcode
-		fillZipcodeField("85001 ");
+        fillZipcodeField("85001 ");
 //		// Fill Comments
-	fillCommentsField("An itemized list of goods and/or services requested by the client or customer.\n" +
-            "Prices for each item including labor costs, taxes and discounts." +
-            "Disclaimers on the scope of the product or project" +
-            "Payment terms and contact information for follow-up.");
+        fillCommentsField("An itemized list of goods and/or services requested by the client or customer.\n" +
+                "Prices for each item including labor costs, taxes and discounts." +
+                "Disclaimers on the scope of the product or project" +
+                "Payment terms and contact information for follow-up.");
 
 
         // Click Save button
@@ -877,6 +876,30 @@ public class AdminPageObjects {
         }
     }
 
+    /**
+     * Public getters for page elements used in step definitions
+     */
+    public WebElement getAdminElement() {
+        return adminDropdown;
+    }
+
+    public WebElement getGeneralLink() {
+        return generalSpan;
+    }
+
+    public WebElement getCompanyInfoLink() {
+        return companyInfoSpan;
+    }
+
+    public WebElement getJobInfoLink() {
+        return adminJobInfo;
+    }
+
+    public WebElement getQualificationInfoLink() {
+        return adminQualification;
+    }
+
+
     private void fillCountrydropdown(String country) {
         System.out.println("Attempting to click pn country dropdown fax field (cmbCountry) with: " + country);
 
@@ -890,6 +913,7 @@ public class AdminPageObjects {
 
         }
     }
+
     private void fillAddressField1(String address1) throws InterruptedException {
         System.out.println("Attempting to fill address1 field (txtStreet1) with: " + address1);
 
@@ -1152,7 +1176,7 @@ public class AdminPageObjects {
             }
         }
     }
-
-
-
 }
+
+
+

@@ -13,15 +13,8 @@ import java.util.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -31,6 +24,45 @@ import org.testng.Reporter;
 
 @SuppressWarnings("null")
 public class SeleniumTestHelper {
+
+// ===================== Frame Helpers =====================
+
+    /**
+     * Default explicit wait for frame availability. Adjust if needed.
+     */
+    private static final Duration FRAME_WAIT_TIMEOUT = Duration.ofSeconds(10);
+
+    // Enum for locator strategies to improve maintainability
+    public enum LocatorStrategy {
+        XPATH("xpath", By::xpath),
+        CSS("css", By::cssSelector),
+        ID("id", By::id),
+        NAME("name", By::name),
+        CLASS("class", By::className),
+        LINK_TEXT("link", By::linkText);
+
+        private final String strategyName;
+        private final java.util.function.Function<String, By> byFunction;
+
+
+        LocatorStrategy(String strategyName, java.util.function.Function<String, By> byFunction) {
+            this.strategyName = strategyName;
+            this.byFunction = byFunction;
+        }
+
+        public static LocatorStrategy fromString(String strategy) {
+            for (LocatorStrategy loc : LocatorStrategy.values()) {
+                if (loc.strategyName.equalsIgnoreCase(strategy)) {
+                    return loc;
+                }
+            }
+            throw new IllegalArgumentException("Invalid locator strategy: " + strategy);
+        }
+
+        public By getBy(String locator) {
+            return byFunction.apply(locator);
+        }
+    }
 
     // Lazily initialize driver - will be set by tests via Driver.getInstance()
     // DO NOT initialize as static field to avoid premature browser instantiation
@@ -311,7 +343,8 @@ public class SeleniumTestHelper {
     }
 
     public static void waitForListOfElementsToBeDisplayed(WebDriver driver, List<WebElement> element, int timeOutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds));        ;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds));
+        ;
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
@@ -580,7 +613,7 @@ public class SeleniumTestHelper {
     public static void assertNotEquals(Object actual, Object expected, String message) {
 
         if (null != message) {
-            System.out.println(message + "actual is - " + actual + "expected is - " + expected);
+            System.out.println(message + " actual is - " + actual + " expected is - " + expected);
             Assert.assertNotEquals(actual, expected, message);
         } else {
             Assert.assertNotEquals(actual, expected);
@@ -1026,53 +1059,89 @@ public class SeleniumTestHelper {
     /**
      * Moves the mouse over an element identified by locator strategy and locator string.
      * Supports: xpath, css, id, name, class, link.
+     *
+     * @param strategy the locator strategy (xpath, css, id, name, class, link)
+     * @param locator  the locator value
+     * @throws IllegalArgumentException if strategy is invalid
      */
-    public static void mouseHover(String identify, String locator) {
-        WebDriver driver = getDriver();
-        WebDriver actualDriver = driver;
-        if (driver instanceof com.orangeHrm.utils.WebDriverDispatcher) {
-            actualDriver = ((com.orangeHrm.utils.WebDriverDispatcher) driver).getUnderlyingDriver();
-        }
-        WebElement element = null;
+    public static void mouseHover(String strategy, String locator) {
         try {
-            if (identify.equalsIgnoreCase("xpath")) {
-                element = actualDriver.findElement(By.xpath(locator));
-            } else if (identify.equalsIgnoreCase("css")) {
-                element = actualDriver.findElement(By.cssSelector(locator));
-            } else if (identify.equalsIgnoreCase("id")) {
-                element = actualDriver.findElement(By.id(locator));
-            } else if (identify.equalsIgnoreCase("name")) {
-                element = actualDriver.findElement(By.name(locator));
-            } else if (identify.equalsIgnoreCase("class")) {
-                element = actualDriver.findElement(By.className(locator));
-            } else if (identify.equalsIgnoreCase("link")) {
-                element = actualDriver.findElement(By.linkText(locator));
-            } else {
-                System.out.println("Invalid Locator: " + identify);
-                return;
-            }
-
-            Actions actions = new Actions(actualDriver);
-            actions.moveToElement(element).perform();
+            LocatorStrategy locatorStrategy = LocatorStrategy.fromString(strategy);
+            WebElement element = findElement(locatorStrategy, locator);
+            mouseHover(element);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid locator strategy: " + strategy, e);
         } catch (Exception e) {
-            // JS fallback to dispatch mouseover if Actions fail
-            try {
-                if (element != null) {
-                    ((JavascriptExecutor) driver).executeScript(
-                            "var evObj = document.createEvent('MouseEvents');" +
-                                    "evObj.initMouseEvent('mouseover',true,true,window,0,0,0,0,0,false,false,false,false,0,null);" +
-                                    "arguments[0].dispatchEvent(evObj);",
-                            element);
-                    return;
-                }
-            } catch (Exception ex) {
-                // ignore fallback error and rethrow original
-            }
-            throw new RuntimeException("Failed to perform mouse hover: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to perform mouse hover with strategy '" + strategy +
+                    "' and locator '" + locator + "': " + e.getMessage(), e);
         }
     }
 
-    //Switch to Frame..!!
+    /**
+     * Moves the mouse over a WebElement.
+     * Attempts to use Actions API first, with JavaScript fallback if needed.
+     *
+     * @param element the WebElement to hover over
+     */
+    public static void mouseHover(WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Element cannot be null");
+        }
+
+        WebDriver driver = getDriver();
+        WebDriver actualDriver = driver;
+
+        if (driver instanceof WebDriverDispatcher) {
+            actualDriver = ((WebDriverDispatcher) driver).getUnderlyingDriver();
+        }
+
+        try {
+            // Try using Actions API
+            new Actions(actualDriver).moveToElement(element).perform();
+        } catch (Exception actionsFailed) {
+            // Fallback to JavaScript mouseover event
+            try {
+                executeMouseoverScript(actualDriver, element);
+            } catch (Exception jsException) {
+                throw new RuntimeException("Failed to perform mouse hover - both Actions and JavaScript methods failed: " +
+                        actionsFailed.getMessage(), actionsFailed);
+            }
+        }
+    }
+
+    /**
+     * Helper method to find an element using a locator strategy
+     *
+     * @param strategy the LocatorStrategy enum value
+     * @param locator  the locator value
+     * @return the found WebElement
+     */
+    private static WebElement findElement(LocatorStrategy strategy, String locator) {
+        WebDriver driver = getDriver();
+        WebDriver actualDriver = driver;
+
+        if (driver instanceof WebDriverDispatcher) {
+            actualDriver = ((WebDriverDispatcher) driver).getUnderlyingDriver();
+        }
+
+        return actualDriver.findElement(strategy.getBy(locator));
+    }
+
+    /**
+     * Helper method to execute mouseover event using JavaScript
+     *
+     * @param driver  the WebDriver instance
+     * @param element the WebElement to trigger mouseover on
+     */
+    private static void executeMouseoverScript(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript(
+                "var evObj = document.createEvent('MouseEvents');" +
+                        "evObj.initMouseEvent('mouseover',true,true,window,0,0,0,0,0,false,false,false,false,0,null);" +
+                        "arguments[0].dispatchEvent(evObj);",
+                element);
+    }
+
+/*    //Switch to Frame..!!
 
     public static void switchToFrame(String identify, String locator) {
         WebDriver driver = getDriver();
@@ -1093,7 +1162,7 @@ public class SeleniumTestHelper {
         } else {
             System.out.println("Invalid frame locator: " + identify);
         }
-    }
+    }*/
 
     /**
      * Marks the current thread as interrupted. Use this from catch blocks
@@ -1102,4 +1171,195 @@ public class SeleniumTestHelper {
     public static void markCurrentThreadInterrupted() {
         Thread.currentThread().interrupt();
     }
+
+
+    /**
+     * Switch to a frame using a flexible "identify + locator" pair.
+     * Supported identifiers: "id", "name", "css", "xpath", "index".
+     * <p>
+     * Examples:
+     * switchToFrame("id", "payment-iframe");
+     * switchToFrame("name", "card-frame");
+     * switchToFrame("css", "iframe[src*='checkout']");
+     * switchToFrame("xpath", "//iframe[@title='Secure']");
+     * switchToFrame("index", "0");
+     */
+    public static void switchToFrame(String identify, String locator) {
+        switchToFrame(identify, locator, FRAME_WAIT_TIMEOUT);
+    }
+
+    public static void switchToFrame(String identify, String locator, Duration timeout) {
+        WebDriver driver = getDriver();
+        switchToFrame(driver, identify, locator, timeout);
+    }
+
+    /**
+     * Variant that accepts driver explicitly (optional use).
+     */
+    public static void switchToFrame(WebDriver driver, String identify, String locator, Duration timeout) {
+        Objects.requireNonNull(driver, "driver is required");
+        Objects.requireNonNull(identify, "identify is required");
+        Objects.requireNonNull(locator, "locator is required");
+
+        String key = identify.trim().toLowerCase();
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        try {
+            switch (key) {
+                case "id": {
+                    By by = By.id(locator);
+                    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+                    break;
+                }
+                case "name": {
+                    // nameOrId is supported by driver.switchTo().frame(String)
+                    wait.until(d -> {
+                        try {
+                            d.switchTo().frame(locator);
+                            return true;
+                        } catch (NoSuchFrameException e) {
+                            return false;
+                        }
+                    });
+                    break;
+                }
+                case "css": {
+                    By by = By.cssSelector(locator);
+                    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+                    break;
+                }
+                case "xpath": {
+                    By by = By.xpath(locator);
+                    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+                    break;
+                }
+                case "index": {
+                    int index = parseFrameIndex(locator);
+                    wait.until(d -> {
+                        try {
+                            d.switchTo().frame(index);
+                            return true;
+                        } catch (NoSuchFrameException e) {
+                            return false;
+                        }
+                    });
+                    break;
+                }
+                default:
+                    throw new IllegalArgumentException(
+                            "Unsupported frame identifier: " + identify + " (use id|name|css|xpath|index)");
+            }
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new org.openqa.selenium.TimeoutException(
+                    String.format("Timed out after %ds waiting for frame by %s='%s'",
+                            timeout.getSeconds(), identify, locator), e);
+        }
+    }
+
+    /**
+     * Switch using a By locator (css/xpath/etc.).
+     */
+    public static void switchToFrame(By by) {
+        switchToFrame(by, FRAME_WAIT_TIMEOUT);
+    }
+
+    public static void switchToFrame(By by, Duration timeout) {
+        WebDriver driver = getDriver();
+        switchToFrame(driver, by, timeout);
+    }
+
+    public static void switchToFrame(WebDriver driver, By by, Duration timeout) {
+        Objects.requireNonNull(driver, "driver is required");
+        Objects.requireNonNull(by, "by is required");
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        try {
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new org.openqa.selenium.TimeoutException(
+                    String.format("Timed out after %ds waiting for frame located by: %s",
+                            timeout.getSeconds(), by), e);
+        }
+    }
+
+    /**
+     * Switch using a WebElement that references the iframe element.
+     */
+    public static void switchToFrame(WebElement frameElement) {
+        switchToFrame(frameElement, FRAME_WAIT_TIMEOUT);
+    }
+
+    public static void switchToFrame(WebElement frameElement, Duration timeout) {
+        WebDriver driver = getDriver();
+        switchToFrame(driver, frameElement, timeout);
+    }
+
+    public static void switchToFrame(WebDriver driver, WebElement frameElement, Duration timeout) {
+        Objects.requireNonNull(driver, "driver is required");
+        Objects.requireNonNull(frameElement, "frameElement is required");
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        try {
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameElement));
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new org.openqa.selenium.TimeoutException(
+                    String.format("Timed out after %ds waiting for provided frame element to be available",
+                            timeout.getSeconds()), e);
+        }
+    }
+
+    /**
+     * Switch by zero-based index.
+     */
+    public static void switchToFrame(int index) {
+        switchToFrame(index, FRAME_WAIT_TIMEOUT);
+    }
+
+    public static void switchToFrame(int index, Duration timeout) {
+        WebDriver driver = getDriver();
+        switchToFrame(driver, index, timeout);
+    }
+
+    public static void switchToFrame(WebDriver driver, int index, Duration timeout) {
+        Objects.requireNonNull(driver, "driver is required");
+        if (index < 0) throw new IllegalArgumentException("Frame index must be >= 0");
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        try {
+            wait.until(d -> {
+                try {
+                    d.switchTo().frame(index);
+                    return true;
+                } catch (NoSuchFrameException e) {
+                    return false;
+                }
+            });
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new org.openqa.selenium.TimeoutException(
+                    String.format("Timed out after %ds waiting for frame index: %d",
+                            timeout.getSeconds(), index), e);
+        }
+    }
+
+    /**
+     * Return to the top-level document.
+     */
+    public static void switchToDefaultContent() {
+        getDriver().switchTo().defaultContent();
+    }
+
+    /**
+     * Switch to the immediate parent frame.
+     */
+    public static void switchToParentFrame() {
+        getDriver().switchTo().parentFrame();
+    }
+
+// ---------------- Helpers ----------------
+
+    private static int parseFrameIndex(String s) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid frame index: " + s, e);
+        }
+    }
+
 }

@@ -1,0 +1,12 @@
+com\orangeHrm\stepDefinitions\CommonStepDefinitions.class
+com\orangeHrm\stepDefinitions\BaseStepDefinition.class
+com\orangeHrm\stepDefinitions\LeaveStepDefinitions.class
+com\orangeHrm\stepDefinitions\PimStepDefinitions.class
+com\orangeHrm\stepDefinitions\LoginStepDefinitions$TestData.class
+com\orangeHrm\stepDefinitions\LoginStepDefinitions.class
+com\orangeHrm\stepDefinitions\CompanyStepDefinitions.class
+com\orangeHrm\stepDefinitions\CompanyStepDefinitions$TestData.class
+com\orangeHrm\stepDefinitions\AdminStepDefinitions.class
+com\orangeHrm\runners\OrangeHrmMasterRunner.class
+com\orangeHrm\stepDefinitions\SpecificHolidayStepDefinitions$TestData.class
+com\orangeHrm\stepDefinitions\SpecificHolidayStepDefinitions.class

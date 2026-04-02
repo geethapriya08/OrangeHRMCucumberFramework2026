@@ -1,0 +1,161 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+Config file generated for :- test environment
+Mar 20, 2026 10:53:00 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 146, returning the closest version; found: 144; Please update to a Selenium version that supports CDP version 146
+Execution started for : Access Company General Information and View Company General Details
+Opening URL: http://localhost/orangehrm/login.php
+Page URL after load: http://localhost/orangehrm/login.php
+Page Title: OrangeHRM - New Level of HR Management
+Page Source length: 8730
+Opened OrangeHRM login page: http://localhost/orangehrm/login.php
+Loaded test data for TC_001: Username=admin
+Loaded test data for TC_001: Username=admin
+Total input fields found: 6
+  Input 0: id='', name='actionID', type='hidden', placeholder=''
+  Input 1: id='hdnUserTimeZoneOffset', name='hdnUserTimeZoneOffset', type='hidden', placeholder=''
+  Input 2: id='', name='txtUserName', type='text', placeholder=''
+  Input 3: id='', name='txtPassword', type='password', placeholder=''
+  Input 4: id='', name='Submit', type='submit', placeholder=''
+  Input 5: id='', name='clear', type='reset', placeholder=''
+Waiting for username field...
+Username field found!
+Submitted login for user: admin
+Hovering over admin dropdown...
+Successfully hovered over admin dropdown (via SeleniumTestHelper)
+Navigating to Company Info -> General
+Hovering over Company Info...
+Successfully hovered over Company Onfo
+Clicking on General
+Successfully clicked eGeneral
+Successfully navigated to admin general module
+ Page title is successfully verifiedactual is - Company Info : Generalexpected is - Company Info : General
+Verify company field id for 'Company Name'actual is - txtCompanyNameexpected is - txtCompanyName
+Element with id 'txtCompanyName' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Tax ID'actual is - txtTaxIDexpected is - txtTaxID
+Element with id 'txtTaxID' should be visibleactual is - trueexpected is - true
+Verify company field id for 'NAICS'actual is - txtNAICSexpected is - txtNAICS
+Element with id 'txtNAICS' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Phone'actual is - txtPhoneexpected is - txtPhone
+Element with id 'txtPhone' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Country'actual is - cmbCountryexpected is - cmbCountry
+Element with id 'cmbCountry' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Address1'actual is - txtStreet1expected is - txtStreet1
+Element with id 'txtStreet1' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Address2'actual is - txtStreet2expected is - txtStreet2
+Element with id 'txtStreet2' should be visibleactual is - trueexpected is - true
+Verify company field id for 'City'actual is - cmbCityexpected is - cmbCity
+Element with id 'cmbCity' should be visibleactual is - trueexpected is - true
+Verify company field id for 'State/Province'actual is - txtStateexpected is - txtState
+Element with id 'txtState' should be visibleactual is - trueexpected is - true
+Verify company field id for 'ZIP Code'actual is - txtZIPexpected is - txtZIP
+Element with id 'txtZIP' should be visibleactual is - trueexpected is - true
+Verify company field id for 'Comments'actual is - txtCommentsexpected is - txtComments
+Element with id 'txtComments' should be visibleactual is - trueexpected is - true
+clicking on editButton...
+Successfully clicked on Edit button
+Successfully clicked the Edit button
+Available Excel columns: [TestCaseID, Company_Name, Tax_ID, NAICS, Phone, Fax, Country, Address1, Address2, City, State , ZIP_Code, Comments, ExpectedResult]
+Loaded State from column: 'State ' = Telangana
+Loaded test data for TC_General_001: companyName=Wipro
+Attempting to fill companyName field (txtCompanyName) with: Wipro
+Trying companyName (id='txtCompanyName')
+Successfully filled companyName field by id
+Attempting to fill taxID field (txtTaxID) with: 4323
+Trying taxIDField (id='txtTaxID')
+Successfully filled taxID field
+Attempting to fill taxID field (txtNAICS) with: 3453
+Trying NAICSField (id='txtNAICS')
+Successfully filled NAICS field
+Attempting to fill taxID field (txtPhone) with: 8686609500
+Trying phoneField (id='txtPhone')
+Successfully filled phone field
+Attempting to fill fax field (txtFax) with: 4567
+Trying fax field (id='txtFax')
+Successfully filled fax field
+Attempting to click pn country dropdown fax field (cmbCountry) with: Australia
+Trying to click on country dropdown (id='cmbCountry')
+Successfully filled country field
+Attempting to fill address1 field (txtStreet1) with:  456 W 100 N or 123 Main St
+Trying address1 (id='txtStreet1')
+Successfully filled address1 field
+Attempting to fill address2 field (txtStreet2) with: RR 3 Box 9, Canton OH 44730
+Trying address2Field (id='txtStreet2')
+Successfully filled address2 field
+Attempting to fill city field (cmbCity) with: Cannada
+Trying cityField (id='cmbCity')
+Successfully filled city field
+Attempting to fill state field (txtState) with: Telangana
+Trying stateField (id='txtState')
+Successfully filled state field
+Attempting to fill zipCode field (txtZIP) with: 85001
+Trying zipCodeField (id='txtZIP')
+Successfully filled zipCode field
+Attempting to fill comments field (txtComments) with: An itemized list of goods and/or services requested by the client or customer.
+Trying commentsField (id='txtComments')
+Successfully filled comments field
+Company information details edited successfully
+Successfully clicked the Save button
+Verify Company Name field is reflected correctly in the formactual is - Wiproexpected is - Wipro
+? Company Name verified: Wipro
+Verify Tax ID field is reflected correctly in the formactual is - 4323expected is - 4323
+? Tax ID verified: 4323
+Verify NAICS field is reflected correctly in the formactual is - 3453expected is - 3453
+? NAICS verified: 3453
+Verify Phone field is reflected correctly in the formactual is - 8686609500expected is - 8686609500
+? Phone verified: 8686609500
+Verify Fax field is reflected correctly in the formactual is - 4567expected is - 4567
+? Fax verified: 4567
+Verify Country dropdown is reflected correctly in the formactual is - Australiaexpected is - Australia
+? Country verified: Australia
+Verify Address1 field is reflected correctly in the formactual is - 456 W 100 N or 123 Main Stexpected is - 456 W 100 N or 123 Main St
+? Address1 verified: 456 W 100 N or 123 Main St
+Verify Address2 field is reflected correctly in the formactual is - RR 3 Box 9, Canton OH 44730expected is - RR 3 Box 9, Canton OH 44730
+? Address2 verified: RR 3 Box 9, Canton OH 44730
+Verify City field is reflected correctly in the formactual is - Cannadaexpected is - Cannada
+? City verified: Cannada
+Verify State/Province field is reflected correctly in the formactual is - Telanganaexpected is - Telangana
+? State/Province verified: Telangana
+Verify ZIP Code field is reflected correctly in the formactual is - 85001expected is - 85001
+? ZIP Code verified: 85001
+Verify Comments field is reflected correctly in the formactual is - An itemized list of goods and/or services requested by the client or customer.expected is - An itemized list of goods and/or services requested by the client or customer.
+? Comments verified: An itemized list of goods and/or services requested by the client or customer.
+All company information fields verified successfully
+Database configuration loaded successfully
+DB URL: jdbc:mysql://127.0.0.1:3306/hr_mysql?useSSL=false&serverTimezone=UTC
+? Successfully connected to database
+Failed to verify company in database: Parameter index out of range (1 > number of parameters, which is 0).
+FAILED
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 33.14 s <<< FAILURE! -- in TestSuite
+[ERROR] com.orangeHrm.runners.OrangeHrmMasterRunner.runScenario["Access Company General Information and View Company General Details", "Company Information Management"](1) -- Time elapsed: 31.93 s <<< FAILURE!
+java.lang.RuntimeException: Database verification failed
+	at com.orangeHrm.stepDefinitions.CompanyStepDefinitions.the_company_information_should_be_saved_in_the_database(CompanyStepDefinitions.java:388)
+	at com.orangeHrm.stepDefinitions.CompanyStepDefinitions.verifyTheCompanyInformationDetailsInDatabase(CompanyStepDefinitions.java:474)
+	at ?.verify the company information details in database(file:///C:/Geetha/Testing%20Practice/Frameworks/OrangeHrmCucumberFramework/OrangeHRM/src/test/resources/Admin_Features/CompanyInformation.feature:34)
+Caused by: java.sql.SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:98)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:90)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:64)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.checkBounds(ClientPreparedStatement.java:1345)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.getCoreParameterIndex(ClientPreparedStatement.java:1358)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.setString(ClientPreparedStatement.java:1714)
+	at com.orangeHrm.utils.DatabaseVerificationUtils.companyExists(DatabaseVerificationUtils.java:254)
+	at com.orangeHrm.stepDefinitions.CompanyStepDefinitions.the_company_information_should_be_saved_in_the_database(CompanyStepDefinitions.java:381)
+	... 2 more
+
+[ERROR] Failures: 
+[ERROR]   OrangeHrmMasterRunner.runScenario ╗ Runtime Database verification failed
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.3.0:test (default-test) on project OrangeHRM: There are test failures.
+[ERROR] 
+[ERROR] Please refer to C:\Geetha\Testing Practice\Frameworks\OrangeHrmCucumberFramework\OrangeHRM\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

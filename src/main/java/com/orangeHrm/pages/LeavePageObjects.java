@@ -93,9 +93,7 @@ public class LeavePageObjects {
     public void navigateToLeaveModule() throws InterruptedException {
         WebDriver driver = Driver.getInstance();
         Thread.sleep(1500);
-
         System.out.println("Hovering over Leave dropdown...");
-
         try {
             // Use SeleniumTestHelper.mouseHover to perform a robust hover
             SeleniumTestHelper.mouseHover("id", "leave");
@@ -104,8 +102,7 @@ public class LeavePageObjects {
         } catch (Exception e) {
             System.out.println("Failed to hover over leave dropdown: " + e.getMessage());
         }
-
-        System.out.println("Navigating to Leave Summary -> Employee leave summary");
+         System.out.println("Navigating to Leave Summary -> Employee leave summary");
 
         try {
             WebDriver actualDriver = driver;

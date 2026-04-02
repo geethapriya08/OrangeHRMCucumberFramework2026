@@ -248,7 +248,27 @@ public class ExcelReader {
         writeWorkbook();
         closeWorkbook();
         clearSheet(sheet);
-        closeWorkbook();
+    }
+
+    /**
+     * Get all column headers from the first row of the current sheet.
+     * Useful for debugging and understanding available columns.
+     * @return List of column header names
+     */
+    public java.util.List<String> getAllColumnHeaders() {
+        java.util.List<String> headers = new java.util.ArrayList<>();
+        if (sheet == null || sheet.getRow(0) == null) {
+            return headers;
+        }
+        Row headerRow = sheet.getRow(0);
+        for (int j = 0; j < headerRow.getLastCellNum(); j++) {
+            Cell cell = headerRow.getCell(j);
+            String cellValue = getCellStringValue(cell);
+            if (cellValue != null) {
+                headers.add(cellValue);
+            }
+        }
+        return headers;
     }
 
     public void clearSheet() {

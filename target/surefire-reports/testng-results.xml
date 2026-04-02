@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+    <line>
+      <![CDATA[Execution started for : Access Company General Information and View Company General Details]]>
+    </line>
+    <line>
+      <![CDATA[Opened OrangeHRM login page: http://localhost/orangehrm/login.php]]>
+    </line>
+    <line>
+      <![CDATA[Submitted login for user: admin]]>
+    </line>
+    <line>
+      <![CDATA[Successfully navigated to admin general module]]>
+    </line>
+    <line>
+      <![CDATA[Successfully clicked the Edit button]]>
+    </line>
+    <line>
+      <![CDATA[Company information details edited successfully]]>
+    </line>
+    <line>
+      <![CDATA[Successfully clicked the Save button]]>
+    </line>
+    <line>
+      <![CDATA[All company information fields verified successfully]]>
+    </line>
+    <line>
+      <![CDATA[✓ Company 'Wipro' found in database]]>
+    </line>
+    <line>
+      <![CDATA[✓ All company details verified successfully in database]]>
+    </line>
+    <line>
+      <![CDATA[✓ Company information and details verified in database]]>
+    </line>
+  </reporter-output>
+  <suite started-at="2026-03-20T22:55:45 IST" name="OrangeHRM Test Suite" finished-at="2026-03-20T22:56:08 IST" duration-ms="23221">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-03-20T22:55:45 IST" name="OrangeHRM Cucumber Tests" finished-at="2026-03-20T22:56:08 IST" duration-ms="23221">
+      <class name="com.orangeHrm.runners.OrangeHrmMasterRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" started-at="2026-03-20T22:55:45 IST" name="setUpClass" finished-at="2026-03-20T22:55:45 IST" duration-ms="373" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@e5864c2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method is-config="true" signature="reportSetup()[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" started-at="2026-03-20T22:55:45 IST" name="reportSetup" finished-at="2026-03-20T22:55:45 IST" duration-ms="109" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportSetup -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" started-at="2026-03-20T22:55:45 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-03-20T22:56:08 IST" duration-ms="22512" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Access Company General Information and View Company General Details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Company Information Management"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[Execution started for : Access Company General Information and View Company General Details]]>
+            </line>
+            <line>
+              <![CDATA[Opened OrangeHRM login page: http://localhost/orangehrm/login.php]]>
+            </line>
+            <line>
+              <![CDATA[Submitted login for user: admin]]>
+            </line>
+            <line>
+              <![CDATA[Successfully navigated to admin general module]]>
+            </line>
+            <line>
+              <![CDATA[Successfully clicked the Edit button]]>
+            </line>
+            <line>
+              <![CDATA[Company information details edited successfully]]>
+            </line>
+            <line>
+              <![CDATA[Successfully clicked the Save button]]>
+            </line>
+            <line>
+              <![CDATA[All company information fields verified successfully]]>
+            </line>
+            <line>
+              <![CDATA[✓ Company 'Wipro' found in database]]>
+            </line>
+            <line>
+              <![CDATA[✓ All company details verified successfully in database]]>
+            </line>
+            <line>
+              <![CDATA[✓ Company information and details verified in database]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" started-at="2026-03-20T22:56:08 IST" name="teardown" finished-at="2026-03-20T22:56:08 IST" duration-ms="163" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.orangeHrm.runners.OrangeHrmMasterRunner@65d09a04]" started-at="2026-03-20T22:56:08 IST" name="tearDownClass" finished-at="2026-03-20T22:56:08 IST" duration-ms="42" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- com.orangeHrm.runners.OrangeHrmMasterRunner -->
+    </test> <!-- OrangeHRM Cucumber Tests -->
+  </suite> <!-- OrangeHRM Test Suite -->
+</testng-results>
