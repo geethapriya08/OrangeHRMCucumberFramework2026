@@ -1,4 +1,4 @@
-package com.orangeHrm.runners;
+package com.orangeHRM.runners;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +21,7 @@ import io.cucumber.testng.CucumberOptions;
 	plugin = { "json:target/cucumber-report.json", "html:target/cucumber-report", "rerun:rerun/failed_scenarios.txt" }, 
 	features = {"src/test/resources" }, 
 	glue = { "com.orangeHrm.stepDefinitions" }, 
-	tags = "@TC_ADM_006",
+	tags = "@TC_ADM",
 	dryRun = false,
 	monochrome = true
 	)
