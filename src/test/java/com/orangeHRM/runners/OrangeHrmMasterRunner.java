@@ -21,7 +21,7 @@ import io.cucumber.testng.CucumberOptions;
 	plugin = { "json:target/cucumber-report.json", "html:target/cucumber-report", "rerun:rerun/failed_scenarios.txt" }, 
 	features = {"src/test/resources" }, 
 	glue = { "com.orangeHrm.stepDefinitions" }, 
-	tags = "@TC_ADM_006",
+	tags = System.getProperty("cucumber.filter.tags", "@TC_ADM_006"),
 	dryRun = false,
 	monochrome = true
 	)

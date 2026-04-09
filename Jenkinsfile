@@ -11,9 +11,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'mvn -B clean test'
+                        sh "mvn -B clean test -Dcucumber.filter.tags='${params.TAGS}'"
                     } else {
-                        bat 'mvn -B clean test'
+                        bat "mvn -B clean test -Dcucumber.filter.tags=\"${params.TAGS}\""
                     }
                 }
             }

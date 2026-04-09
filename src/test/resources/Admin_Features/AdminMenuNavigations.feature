@@ -10,7 +10,7 @@ Feature: Admin Module Navigation and Menu Access
   Background:
     Given I am logged in as an admin user
 
-  @TC-ADM-001 @TC-ADM-002 @TC-ADM-003 @TC-ADM-004 @TC-ADM-005 @Verify_Admin_module_menu_navigations_after_login @high @positive
+  @TC-ADM-001 @TC-ADM-002 @TC-ADM-003 @TC-ADM-004 @TC-ADM-005 @Verify_Admin_module_menu_navigations_after_login @high @positive @regression
   Scenario: Verify Admin menu options is visible after login
     When I hover on Admin menu
     #Then the Admin menu should be visible in the below navigation panel

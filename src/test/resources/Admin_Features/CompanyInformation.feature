@@ -10,7 +10,7 @@ Feature: Company Information Management
   Background:
     Given I am logged in as an admin user
 
-  @TC_ADM_006 @TC-ADM-007 @high @positive
+  @TC_ADM_006 @TC-ADM-007 @high @positive @regression
   Scenario Outline: Access Company General Information and View Company General Details
     When I navigate to Admin → Company Info → General
     Then the General company information page "<title>" should load
