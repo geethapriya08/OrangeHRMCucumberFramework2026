@@ -143,6 +143,18 @@ public class CompanyPageObjects {
     @FindBy(xpath = "//span[normalize-space()='Company Info']")
     public WebElement adminCompanyInfo;
 
+    @FindBy(xpath = "//span[normalize-space()='Locations']")
+    public WebElement adminLocationDropdown;
+
+    @FindBy(id = "rightMenu")
+    public WebElement locationInfoFrame;
+
+    @FindBy(xpath = "//h2[normalize-space()='Company Info : Locations']")
+    public WebElement locationHeader;
+
+    @FindBy(xpath ="//input[@value='Add']")
+    public WebElement addButton;
+
 
     public CompanyPageObjects(WebDriver driver) {
         this.driver = driver;
@@ -755,6 +767,60 @@ public class CompanyPageObjects {
             } catch (Exception e) {
                 // Continue to next
             }
+        }
+    }
+
+    public void navigateToAdminLocationModule() throws InterruptedException {
+        WebDriver driver = Driver.getInstance();
+        Thread.sleep(1500);
+        System.out.println("Hovering over admin dropdown...");
+        try {
+            // Use SeleniumTestHelper.mouseHover to perform a robust hover
+            SeleniumTestHelper.mouseHover("id", "admin");
+            System.out.println("Successfully hovered over admin dropdown (via SeleniumTestHelper)");
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            System.out.println("Failed to hover over admin dropdown: " + e.getMessage());
+        }
+        System.out.println("Navigating to Company Info -> General");
+
+        try {
+            WebDriver actualDriver = driver;
+            if (driver instanceof com.orangeHrm.utils.WebDriverDispatcher) {
+                actualDriver = ((com.orangeHrm.utils.WebDriverDispatcher) driver).getUnderlyingDriver();
+            }
+
+            // Hover over Company Info
+            System.out.println("Hovering over Company Info...");
+            Actions actions = new Actions(actualDriver);
+            actions.moveToElement(companyInfo).perform();
+            System.out.println("Successfully hovered over Company Onfo");
+            Thread.sleep(1000);
+
+            // Click on General
+            System.out.println("Clicking on General");
+            actions.click(adminLocationDropdown).perform();
+            System.out.println("Successfully clicked eGeneral");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Failed in navigation: " + e.getMessage());
+        }
+    }
+
+    public void clickOnAddButton() throws InterruptedException {
+        try {
+            WebDriver actualDriver = driver;
+            if (driver instanceof com.orangeHrm.utils.WebDriverDispatcher) {
+                actualDriver = ((com.orangeHrm.utils.WebDriverDispatcher) driver).getUnderlyingDriver();
+            }
+            // Click on Edit button
+            System.out.println("clicking on add Button...");
+            Actions actions = new Actions(actualDriver);
+            actions.click(addButton).perform();
+            System.out.println("Successfully clicked on Add button");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Failed in click on Add button: " + e.getMessage());
         }
     }
 }

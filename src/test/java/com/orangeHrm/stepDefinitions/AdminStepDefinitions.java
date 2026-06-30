@@ -8,7 +8,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +18,8 @@ public class AdminStepDefinitions extends BaseStepDefinition {
     private LoginStepDefinitions loginStepDefinitions;
     private AdminPageObjects adminPageObjects;
 
-    public AdminStepDefinitions() {
+
+	public AdminStepDefinitions() {
         super();
         this.loginStepDefinitions = new LoginStepDefinitions();
     }
@@ -141,8 +141,16 @@ public class AdminStepDefinitions extends BaseStepDefinition {
         SeleniumTestHelper.assertEquals(expected, actualLabels, "All Job options are verified: ");
 
     }
+	@Then("I should see the following sub-items of Qualification:")
+	public void i_should_see_the_following_sub_items_of_qualification(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+		List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+		// Actual labels from the page
+		List<String> actualLabels = getAdminPageObjects().adminQualificationInfoOptions.stream().map(el -> el.getText().trim()).toList();
+		SeleniumTestHelper.assertEquals(expected, actualLabels, "All Qualification options are verified: ");
 
-    @Then("I hover over or click on Qualification")
+	}
+    @And("I hover over or click on Qualification")
     public void i_hover_over_or_click_on_qualification() {
         logReportMessage("Hovering over Qualification dropdown...");
         try {
@@ -154,15 +162,186 @@ public class AdminStepDefinitions extends BaseStepDefinition {
         }
 
     }
-    @Then("I should see the following sub-items of Qualification:")
-    public void i_should_see_the_following_sub_items_of_qualification(DataTable dataTable) {
-        // Convert DataTable (single column) to List<String>
-        List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
-        // Actual labels from the page
-        List<String> actualLabels = getAdminPageObjects().adminQualificationInfoOptions.stream().map(el -> el.getText().trim()).toList();
-        SeleniumTestHelper.assertEquals(expected, actualLabels, "All Qualification options are verified: ");
 
-    }
+    @Then("I should see the following sub-items of Nationality & Race:")
+	public void i_should_see_the_following_sub_items_of_nationality_race(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminNationalityRaceInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Nationality & Race options are verified: ");
+	    
+	}
+
+	@And("I hover over or click on Nationality & Race")
+	public void i_hover_over_or_click_on_nationality_race() {
+		logReportMessage("Hovering over Nationality & Race dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getNationalityRaceInfoLink());
+	        logReportMessage("Successfully hovered over Nationality & Race dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over QualifiNationality & Racecation dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	@Then("I should see the following sub-items of Memberships:")
+	public void i_should_see_the_following_sub_items_of_memberships(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminMembershipsInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Memberships options are verified: ");
+	    
+	}
+
+	@And("I hover over or click on Memberships")
+	public void i_hover_over_or_click_on_memberships() {
+		logReportMessage("Hovering over Memberships dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getMembershipInfoLink());
+	        logReportMessage("Successfully hovered over Memberships dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Memberships dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	@Then("I should see the following sub-items of Skills:")
+	public void i_should_see_the_following_sub_items_of_skills(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminSkillsInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Skills options are verified: ");
+	    
+	}
+
+	@And("I hover over or click on Skills")
+	public void i_hover_over_or_click_on_skills() {
+		logReportMessage("Hovering over Skills dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getSkillsInfoLink());
+	        logReportMessage("Successfully hovered over Skills dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Skills dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	@And("I hover over or click on Users")
+	public void i_hover_over_or_click_on_users() {
+		logReportMessage("Hovering over Users dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getUsersInfoLink());
+	        logReportMessage("Successfully hovered over Users dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Users dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	@Then("I should see the following sub-items of Users:")
+	public void i_should_see_the_following_sub_items_of_users(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminUsersInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Users options are verified: ");
+	}
+
+	@And("I hover over or click on Email Notifications")
+	public void i_hover_over_or_click_on_email_notifications() {
+		logReportMessage("Hovering over Email Notifications dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getEmailNotificationsInfoLink());
+	        logReportMessage("Successfully hovered over Email Notifications dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Email Notifications dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	@Then("I should see the following sub-items of Email Notifications:")
+	public void i_should_see_the_following_sub_items_of_email_notifications(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminEmailNotificationsInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Email Notifications options are verified: ");
+	}
+
+	@And("I hover over or click on Project Info")
+	public void i_hover_over_or_click_on_project_info() {
+		logReportMessage("Hovering over Project Info dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getProjectInfoLink());
+	        logReportMessage("Successfully hovered over Project Info dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Project Info dropdown: " + e.getMessage());
+	    }
+	
+	
+	}
+
+	@Then("I should see the following sub-items of Project Info:")
+	public void i_should_see_the_following_sub_items_of_project_info(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminProjectInfoOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Project Info options are verified: ");
+	}
+
+	@And("I hover over or click on Data Import\\/Export")
+	public void i_hover_over_or_click_on_data_import_export() {
+		logReportMessage("Hovering over Import/Export dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getDataImportExportInfoLink());
+	        logReportMessage("Successfully hovered over Import/Export dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Import/Export dropdown: " + e.getMessage());
+	    }
+	
+	
+	}
+
+	@Then("I should see the following sub-items of Data Import\\/Export:")
+	public void i_should_see_the_following_sub_items_of_data_import_export(DataTable dataTable) {
+		// Convert DataTable (single column) to List<String>
+	    List<String> expected = dataTable.asList().stream().map(String::trim).collect(Collectors.toList());
+	    // Actual labels from the page
+	    List<String> actualLabels = getAdminPageObjects().adminDataImportExportOptions.stream().map(el -> el.getText().trim()).toList();
+	    SeleniumTestHelper.assertEquals(expected, actualLabels, "All Data Import\\\\/Export: options are verified: ");
+	}
+
+	@And("I hover over or click on Custom Fields")
+	public void i_hover_over_or_click_on_custom_fields() {
+		logReportMessage("Hovering over Custom Fields dropdown...");
+	    try {
+	        // Use SeleniumTestHelper.mouseHover with WebElement from AdminPageObjects
+	        SeleniumTestHelper.mouseHover(getAdminPageObjects().getCustomFieldsInfoLink());
+	        logReportMessage("Successfully hovered over Custom Fields dropdown");
+	    } catch (Exception e) {
+	        logReportMessage("Failed to hover over Custom Fields dropdown: " + e.getMessage());
+	    }
+	
+	    
+	}
+
+	
 
 
 }

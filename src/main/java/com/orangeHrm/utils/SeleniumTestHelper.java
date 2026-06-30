@@ -168,8 +168,7 @@ public class SeleniumTestHelper {
 
     private static int retryCount = 0;
 
-    public static void selectFromDropDown(WebElement element, String value,
-                                          String mode) {
+    public static void selectFromDropDown(WebElement element, String value, String mode) {
         try {
             Select select = new Select(element);
             if (mode.equalsIgnoreCase("value")) {
@@ -200,21 +199,20 @@ public class SeleniumTestHelper {
         }
     }
 
-    public static void selectServiceTypeDropDown(String prodName,
-                                                 String serviceType) {
+    public static void selectServiceTypeDropDown(String prodName, String serviceType) {
         // This method references non-existent RetailerNewInboundShipmentPageObject
         // Use selectAdvancedDropDown instead
         throw new UnsupportedOperationException("Use selectAdvancedDropDown method instead");
     }
 
-    public static void selectAdvancedDropDown(WebElement dropDown,
-                                              String dropDownItemName) {
+    public static void selectAdvancedDropDown(WebElement dropDown, String dropDownItemName) {
         WebDriver driver = Driver.getInstance();
         WebDriverWait wd = new WebDriverWait(driver, Duration.ofSeconds(20));
         wd.until(ExpectedConditions.elementToBeClickable(dropDown));
         dropDown.click();
         // Generic XPath for advanced dropdown items
-        driver.findElement(By.xpath("//li[contains(@class,'select2-results__option') and contains(text(),'" + dropDownItemName + "')]")).click();
+        driver.findElement(By.xpath("//li[contains(@class,'select2-results__option') and contains(text(),'" 
+        + dropDownItemName + "')]")).click();
     }
 
     public static void selectFromAdvancedDropDown(String prodName,
@@ -727,7 +725,9 @@ public class SeleniumTestHelper {
             // fallback: attempt JS click then direct click
             try {
                 ((JavascriptExecutor) actualDriver).executeScript(
-                        "var evObj = document.createEvent('MouseEvents'); evObj.initMouseEvent('click',true,true,window,0,0,0,0,0,false,false,false,false,0,null); arguments[0].dispatchEvent(evObj);",
+                        "var evObj = document.createEvent('MouseEvents'); "
+                        + "evObj.initMouseEvent('click',true,true,window,0,0,0,0,0,false,false,false,false,0,null); "
+                        + "arguments[0].dispatchEvent(evObj);",
                         target);
                 return;
             } catch (Exception ex) {

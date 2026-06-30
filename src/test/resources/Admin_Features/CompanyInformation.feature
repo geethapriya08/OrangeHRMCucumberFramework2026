@@ -1,13 +1,12 @@
 #Author: Geetha Priya
 #Keywords Summary : This feature is for verifying Company information menu options after login
-
 @admin @company @smoke
 Feature: Company Information Management
   As an admin user
   I want to manage company information
   So that I can maintain accurate company details
 
-  Background:
+  Background: 
     Given I am logged in as an admin user
 
   @TC_ADM_006 @TC-ADM-007 @high @positive @regression
@@ -15,24 +14,59 @@ Feature: Company Information Management
     When I navigate to Admin → Company Info → General
     Then the General company information page "<title>" should load
     And I should see the following company information:
-      | Field          | FieldId         |
-      | Company Name   | txtCompanyName  |
-      | Tax ID         | txtTaxID        |
-      | NAICS          | txtNAICS        |
-      | Phone          | txtPhone        |
-      | Country        | cmbCountry      |
-      | Address1       | txtStreet1      |
-      | Address2       | txtStreet2      |
-      | City           | cmbCity         |
-      | State/Province | txtState        |
-      | ZIP Code       | txtZIP          |
-      | Comments       | txtComments     |
+      | Field          | FieldId        |
+      | Company Name   | txtCompanyName |
+      | Tax ID         | txtTaxID       |
+      | NAICS          | txtNAICS       |
+      | Phone          | txtPhone       |
+      | Country        | cmbCountry     |
+      | Address1       | txtStreet1     |
+      | Address2       | txtStreet2     |
+      | City           | cmbCity        |
+      | State/Province | txtState       |
+      | ZIP Code       | txtZIP         |
+      | Comments       | txtComments    |
     When I click the Edit button
     And I edit the company information details in the general section
     And I click the Save button
     Then the updated information should be reflected in the form
     And verify the company information details in database
-    Examples:
+
+    Examples: 
       | title                  |
       | Company Info : General |
 
+  @TC_ADM_006 @TC-ADM-007 @high @positive @Location
+  Scenario Outline: Verify Locations page navigation
+    When I navigate to Admin → Company Info → Locations
+    Then the Company Info Location information page "<title>" should load
+    When I click on Add button
+    And I should see the following Location information:
+      | Field          | FieldId           |
+      | Name           | txtLocDescription |
+      | Country        | cmbCountry        |
+      | State/Province | txtState          |
+      | City           | cmbDistrict       |
+      | Address        | txtAddress        |
+      | ZIP Code       | txtZIP            |
+      | Phone          | txtPhone          |
+      | Fax            | txtFax            |
+      | Comments       | txtComments       |
+    And I fill all the details in the Location section
+      | Field          | Value             |
+      | Name           | Test Location     |
+      | Country        | United States     |
+      | State/Province | California        |
+      | City           | San Francisco     |
+      | Address        | 123 Test Avenue   |
+      | ZIP Code       | 94105             |
+      | Phone          | 1234567890        |
+      | Fax            | 0987654321        |
+      | Comments       | Test location     |
+    And I click the Save button of Locations page
+    Then the updated information should be reflected in the form of Locations page
+    And verify the company information details in database of Locations
+
+    Examples: 
+      | title                    |
+      | Company Info : Locations |
