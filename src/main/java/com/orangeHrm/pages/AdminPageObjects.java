@@ -189,7 +189,8 @@ public class AdminPageObjects {
     @FindBy(xpath = "//textarea[@name='txtComments']")
     private WebElement commentsFieldByName;
 
-    @FindBy(xpath = " (//ul[contains(@class,'l2')][.//a[contains(@class,'companyinfo')]]) /li[contains(@class,'l2')]/a[contains(@class,'l2_link')]/span")
+    @FindBy(xpath = " (//ul[contains(@class,'l2')][.//a[contains(@class,'companyinfo')]]) "
+    		+ "/li[contains(@class,'l2')]/a[contains(@class,'l2_link')]/span")
     public List<WebElement> adminMenuItems;
 
     @FindBy(xpath = "//span[normalize-space()='Company Info']")
@@ -221,6 +222,69 @@ public class AdminPageObjects {
             "/following-sibling::ul[contains(@class,'l3')][1]\n" +
             "/li[contains(@class,'l3')]/a/span\n")
     public List<WebElement> adminQualificationInfoOptions;
+    
+    @FindBy(xpath = "//a[@class='l2_link parent skills']//span[contains(text(),'Skills')]")
+    public WebElement adminSkills;
+    
+    @FindBy(xpath = "(//ul[contains(@class,'l2')][.//a[contains(@class,'skills')]])[1]\r\n"
+    		+ "/li[contains(@class,'l2')]\r\n"
+    		+ "/a[contains(@class,'l2_link') and contains(@class,'skills')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')][1]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminSkillsInfoOptions;
+    
+   @FindBy(xpath = "//a[@class='l2_link parent memberships']//span[contains(text(),'Memberships')]")
+    public WebElement adminMemberships;
+    
+    @FindBy(xpath = "(//ul[contains(@class,'l2')][.//a[contains(@class,'memberships')]])[1]\r\n"
+    		+ "/li[contains(@class,'l2')]\r\n"
+    		+ "/a[contains(@class,'l2_link') and contains(@class,'memberships')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')][1]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminMembershipsInfoOptions;
+    
+    @FindBy(xpath = "//span[normalize-space()='Nationality & Race']")
+    public WebElement adminNationalityRace;
+    
+    @FindBy(xpath = "//a[contains(@class,'l2_link') and contains(@class,'natandrace')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminNationalityRaceInfoOptions;
+    
+    @FindBy(xpath = "//span[normalize-space()='Users']")
+    public WebElement adminUsers;
+    
+    @FindBy(xpath = "//a[contains(@class,'l2_link') and contains(@class,'users')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminUsersInfoOptions;
+    
+    @FindBy(xpath = "//span[normalize-space()='Email Notifications']")
+    public WebElement adminEmailNotifications;
+    
+    @FindBy(xpath = "//a[contains(@class,'l2_link') and contains(@class,'email')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminEmailNotificationsInfoOptions;
+    
+    @FindBy(xpath = "//span[normalize-space()='Project Info']")
+    public WebElement adminProjectInfo;
+    
+    @FindBy(xpath = "//a[contains(@class,'l2_link') and contains(@class,'project')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminProjectInfoOptions;
+    
+    @FindBy(xpath = "//span[normalize-space()='Data Import/Export']")
+    public WebElement adminDataImportExport;
+    
+    @FindBy(xpath = "//a[contains(@class,'l2_link') and contains(@class,'importexport')]\r\n"
+    		+ "/following-sibling::ul[contains(@class,'l3')]\r\n"
+    		+ "/li[contains(@class,'l3')]/a/span")
+    public List<WebElement> adminDataImportExportOptions;
+    
+    @FindBy(xpath = "//a[@class='l2_link customfields']")
+    public WebElement adminCustomFields;
 
 
     /**
@@ -897,6 +961,31 @@ public class AdminPageObjects {
 
     public WebElement getQualificationInfoLink() {
         return adminQualification;
+    }
+    
+    public WebElement getSkillsInfoLink() {
+        return adminSkills;
+    }
+    public WebElement getMembershipInfoLink() {
+        return adminMemberships;
+    }
+    public WebElement getNationalityRaceInfoLink() {
+        return adminNationalityRace;
+    }
+    public WebElement getUsersInfoLink() {
+        return adminUsers;
+    }
+    public WebElement getEmailNotificationsInfoLink() {
+        return adminEmailNotifications;
+    }
+    public WebElement getProjectInfoLink() {
+        return adminProjectInfo;
+    }
+    public WebElement getDataImportExportInfoLink() {
+        return adminDataImportExport;
+    }
+    public WebElement getCustomFieldsInfoLink() {
+        return adminCustomFields;
     }
 
 

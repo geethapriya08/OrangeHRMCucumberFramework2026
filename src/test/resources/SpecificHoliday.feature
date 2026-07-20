@@ -5,7 +5,7 @@ Feature: Title of your feature
   Background:
     Given I open the OrangeHRM login page
 
-  @admin3
+  @admin3 @regression
   Scenario: Verify employee creation in OrangeHRM
     #Given I open the OrangeHRM login page
     When I log in with data from test case

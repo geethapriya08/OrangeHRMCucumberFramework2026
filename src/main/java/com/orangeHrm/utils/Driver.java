@@ -54,7 +54,7 @@ public class Driver {
 				options.addArguments("disable-infobars");
 
 				// BasicConfigurator.configure();
-				// WebDriverManager.chromedriver().setup();
+				 WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver(options);
 			}
 			driver.manage().deleteAllCookies();
